@@ -9,6 +9,7 @@
 | fast/Vit-L/14  **| 410ms $\pm$ 20ms | 40ms | 90 | good | 88|
 | openclip/Vit-L/14 | 300ms $\pm$ 20ms | 42ms $\pm$ 3ms  |97.5 | good |91|
 | opencv/Vit-L-14 | 290ms $\pm$ 20ms | 42ms |90 | good |88|
+| onnx/ViT-L/14 | 410ms $\pm$ 20ms |40ms |97.5| good |91|
 
 
 > *Vit-B/32 and Vit-L/14 are openai implementations of clip. 
