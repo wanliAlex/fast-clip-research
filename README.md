@@ -14,3 +14,9 @@
 > *Vit-B/32 and Vit-L/14 are openai implementations of clip. 
 > 
 > **fast means the model is using opencv preprocessing and using onnx model to inference
+
+Fastclip, with opencv preprocessing and onnx model, can reduce the preprocessing time of model __ViT-B/32__ without losing performance.
+
+However, onnx model is even increasing the inference time for __ViT-L/14__
+
+Opencv will affect the performance a littile bit but the results are still acceptable.
