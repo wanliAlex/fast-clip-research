@@ -11,5 +11,5 @@
 | opencv/Vit-L-14 | 290ms $\pm$ 20ms | 42ms |90 | good |88|
 
 
-* Vit-B/32 and Vit-L/14 are openai implementations of clip. 
-** fast means the model is using opencv preprocessing and using onnx model to inference
+>_ * Vit-B/32 and Vit-L/14 are openai implementations of clip. 
+>_ ** fast means the model is using opencv preprocessing and using onnx model to inference
