@@ -1,5 +1,7 @@
 # fast-clip-research
 
+## Add documents part
+
 
 | Model Name     | Image Indexing Time|  Text Indexing Time | Text-to-Image score | Image-to-Image score | Image-to-text score
 | -------------: | -----------: |-----------: | -----------: | -----------: | -----------: |
