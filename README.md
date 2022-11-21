@@ -19,17 +19,15 @@ __CBS___ = Client_Batch_Size
 | onnx/ViT-L/14 | 426                            | 41 | 636 | 58 | 488 | 91 |
 
 ### Performance
-
-|         Model Name |           Image Indexing Time |           Text Indexing Time | Text-to-Image score | Image-to-Image score | Image-to-text score
-|-------------------:|------------------------------:|-----------------------------:| -----------: | -----------: | -----------: |
-|         Vit-B/32   |                          58ms |                         33ms | 92.5 |  good| 91 |
-|           Vit-L/14 |              320ms $\pm$ 20ms |                         45ms | 97.5 |  good| 91 |
-|      fast/Vit-B/32 |                          36ms |                         20ms | 97.5 |  good| 88 |
-|      fast/Vit-L/14 |              410ms $\pm$ 20ms |                         40ms | 90 | good | 88|
-|  openclip/Vit-L/14 |              300ms $\pm$ 20ms |               42ms $\pm$ 3ms |97.5 | good |91|
-|    opencv/Vit-L-14 |              290ms $\pm$ 20ms |                         42ms |90 | good |88|
-|      onnx/ViT-L/14 |              410ms $\pm$ 20ms |                         40ms |97.5| good |91|
-
+| Model Name | Text-to-image score (single-label) | Text-to-image score (double-label) | Text-to-image (trible-label) | Image-to-text score | Image-to-Image score |
+|---|---|---|---|---|---|
+| Vit-B/32 | 92.5 | 78.75 | 46.7 | 91 | good |
+| Vit-L/14 | 97.5 | 82.5 | 52.3 | 91 | good |
+| fast/Vit-B/32 | 97.5 | 72.5 | 48 | 88 | good |
+| fast/Vit-L/14 | 90 | 81.25 | 52.3 | 88 | good |
+| openclip/Vit-L/14 | 97.5 | 82.5 | 52.3 | 91 | good |
+| opencv/Vit-L-14 | 90 | 81.25 | 52.3 | 88 | good |
+| onnx/ViT-L/14 | 97.5 | 82.5 | 52.3 | 91 | good |
 > *Vit-B/32 and Vit-L/14 are openai implementations of clip. 
 > 
 > **fast means the model is using opencv preprocessing and using onnx model to inference
