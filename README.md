@@ -37,3 +37,21 @@ Fastclip, with opencv preprocessing and onnx model, can reduce the preprocessing
 However, onnx model is even increasing the inference time for __ViT-L/14__
 
 Opencv will affect the performance a littile bit but the results are still acceptable.
+
+## Preprocessing:
+
+This section compares different image preprocessing methods.
+
+| TRANSFORMS | TIME (ms) | PROCESSED DIFF (mean) | ENCODE DIFF (mean) |
+|:---:|:---:|:---:|:---:|
+| original_clip | 14.6 | 0.0 | 0.0 |
+| our_clip_implementation | 14.7 | 0.0 | 0.0 |
+| opencv_based | 4.67 | 1.22 | 0.19 |
+| script_based | 8.07 | 0.037 | 0.0526 |
+| rgb_conversion | 12.1 | 0.031 | 0.0475 |
+| grey_conversion | 5.33 | 0.053 | 0.121 |
+| read_from_cv | 0.940 | 1.22 | 0.19 |
+
+
+
+
