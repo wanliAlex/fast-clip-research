@@ -55,14 +55,14 @@ This section compares different image preprocessing methods.
 
 ## Inference:
 
-| Models | Time cost | Comments | Links | Difference |
-|:---:|:---:|:---:|:---:|:---:|
-| ViT-B/32 | 7.76 ms ± 127 µs | N/A | N/A | N/A |
-| onnx/ViT-B/32 | 4.16 ms ± 152 µs | Using clip_onnx package | https://github.com/Lednik7/CLIP-ONNX | 9e-6 |
-| open_clip/ViT-B-32/openai | 8.05 ms ± 104 µs | N/A | N/A | N/A |
-| Pytorch Dynamic Quantization | N/A | Does not support GPU (support CPU) | https://discuss.pytorch.org/t/does-dynamic-quantization-support-gpu/119231 | N/A |
-| Neural Magic | N/A | Does not support GPU (support CPU) | https://github.com/neuralmagic/docs | N/A |
-| DeepSpeed | N/A | Can’t get it work on my windows | https://github.com/microsoft/DeepSpeed | N/A |
+| Models | Time cost | Comments |                                                                     Links                                                                     | Difference |
+|:---:|:---:|:---:|:---------------------------------------------------------------------------------------------------------------------------------------------:|:---:|
+| ViT-B/32 | 7.76 ms ± 127 µs | N/A |                                                                      N/A                                                                      | N/A |
+| onnx/ViT-B/32 | 4.16 ms ± 152 µs | Using clip_onnx package |                                                 [link] (https://github.com/Lednik7/CLIP-ONNX)                                                 | 9e-6 |
+| open_clip/ViT-B-32/openai | 8.05 ms ± 104 µs | N/A |                                                                      N/A                                                                      | N/A |
+| Pytorch Dynamic Quantization | N/A | Does not support GPU (support CPU) |                              [link] (https://discuss.pytorch.org/t/does-dynamic-quantization-support-gpu/119231)                              | N/A |
+| Neural Magic | N/A | Does not support GPU (support CPU) |                                                      https://github.com/neuralmagic/docs                                                      | N/A |
+| DeepSpeed | N/A | Can’t get it work on my windows |                                                    https://github.com/microsoft/DeepSpeed                                                     | N/A |
 | Optimized onnx | 4.12 ms ± 152 µs | No difference between onnx | https://github.com/microsoft/onnxruntime/blob/433f262dd551e79f6b3af6d777b5c94eb907622a/onnxruntime/python/tools/transformers/optimizer.py#L53 | 9e-6 |
 
 
