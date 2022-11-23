@@ -67,7 +67,7 @@ This section compares different image preprocessing methods.
 
 
 # EC2 Instance
-### Processing Time
+### Add_Documents() Time
 
 | Model Name | Image Indexing Time (CBS = 100) | Text Indexing Time (CBS = 100) | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 50) | Image Indexing Time (CBS = 10) | Text Indexing Time (CBS = 10) | Image Indexing Time (CBS = 1) | Text Indexing Time (CBS = 1) |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
