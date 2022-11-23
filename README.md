@@ -79,4 +79,5 @@ This section compares different image preprocessing methods.
 | opencv/Vit-L-14 | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
 | onnx/ViT-L/14 | 64 | 9 | 60 | 10 | 71 | 28 | 226 | 139 |
 
+For __onnx/ViT-L/14__, there is a converging process in the processing speed. The indexing time starts from 150m/per doc and converges to 64ms/per doc after 40 batches.
 
