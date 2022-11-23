@@ -66,5 +66,17 @@ This section compares different image preprocessing methods.
 | Optimized onnx | 4.12 ms ± 152 µs | No difference between onnx | [link](https://github.com/microsoft/onnxruntime/blob/433f262dd551e79f6b3af6d777b5c94eb907622a/onnxruntime/python/tools/transformers/optimizer.py#L53) | 9e-6 |
 
 
+# EC2 Instance
+### Processing Time
+
+| Model Name | Image Indexing Time (CBS = 100) | Text Indexing Time (CBS = 100) | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 50) | Image Indexing Time (CBS = 10) | Text Indexing Time (CBS = 10) | Image Indexing Time (CBS = 1) | Text Indexing Time (CBS = 1) |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Vit-B/32 * | 18 | 7 | 19 | 8 | 26 | 14 | 70 | 65 |
+| Vit-L/14 | 74 | 9 | 74 | 11 | 80 | 15 | 129 | 65 |
+| fast/Vit-B/32 ** | 17 | 6 | 36 | 8 | 44 | 14 | 80 | 80 |
+| fast/Vit-L/14 | 58 | 9 | 410 | 10 | 420 | 28 | 500 | 139 |
+| openclip/Vit-L/14 | 76 | 11.8 | 78 | 13 | 89 | 22 | 220 | 14 |
+| opencv/Vit-L-14 | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
+| onnx/ViT-L/14 | 64 | 9 | 60 | 10 | 71 | 28 | 226 | 139 |
 
 
