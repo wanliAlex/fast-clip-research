@@ -76,7 +76,8 @@ This section compares different image preprocessing methods.
 | fast/Vit-B/32 ** | 17 | 6 | 36 | 8 | 44 | 14 | 80 | 80 |
 | fast/Vit-L/14 | 58 | 9 | 410 | 10 | 420 | 28 | 500 | 139 |
 | openclip/Vit-L/14 | 76 | 11.8 | 78 | 13 | 89 | 22 | 220 | 14 |
-| opencv/Vit-L-14 | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
+| opencv/Vit-L-14/cuda | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
+| opencv/Vit-L-14/trt todo | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
 | onnx/ViT-L/14 | 64 | 9 | 60 | 10 | 71 | 28 | 226 | 139 |
 
 For __onnx/ViT-L/14__, there is a converging process in the processing speed. The indexing time starts from 150m/per doc and converges to 64ms/per doc after 40 batches.
