@@ -72,8 +72,8 @@ This section compares different image preprocessing methods.
 | Model Name | Image Indexing Time (CBS = 100) | Text Indexing Time (CBS = 100) | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 50) | Image Indexing Time (CBS = 10) | Text Indexing Time (CBS = 10) | Image Indexing Time (CBS = 1) | Text Indexing Time (CBS = 1) |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Vit-B/32 * | 18 | 7 | 19 | 8 | 26 | 14 | 70 | 65 |
-| Vit-L/14 | 74 | 9 | 74 | 11 | 80 | 15 | 129 | 65 |
 | fast/Vit-B/32 ** | 17 | 6 | 36 | 8 | 44 | 14 | 80 | 80 |
+| Vit-L/14 | 74 | 9 | 74 | 11 | 80 | 15 | 129 | 65 |
 | fast/Vit-L/14 | 58 | 9 | 410 | 10 | 420 | 28 | 500 | 139 |
 | openclip/Vit-L/14 | 76 | 11.8 | 78 | 13 | 89 | 22 | 220 | 14 |
 | opencv/Vit-L-14/cuda | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
