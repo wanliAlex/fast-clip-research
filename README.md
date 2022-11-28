@@ -40,8 +40,19 @@ For __onnx/ViT-L/14__, there is a converging process in the processing speed. Th
 | grey_conversion | 12.7 ms ± 15.5 µs | 3 ms ± 60.1 µs |  |
 | read_from_cv | 672 µs ± 143 µs | 652 µs ± 70.4 µs |  |
 
+### Performance
+| Model Name | Text-to-image score (single-label) | Text-to-image score (double-label) | Text-to-image (trible-label) | Image-to-text score | Image-to-Image score |
+|---|---|---|---|---|---|
+| Vit-B/32 | 92.5 | 78.75 | 46.7 | 91 | good |
+| Vit-L/14 | 97.5 | 82.5 | 52.3 | 91 | good |
+| fast/Vit-B/32 | 97.5 | 72.5 | 48 | 88 | good |
+| fast/Vit-L/14 | 90 | 81.25 | 52.3 | 88 | good |
+| openclip/Vit-L/14 | 97.5 | 82.5 | 52.3 | 91 | good |
+| opencv/Vit-L-14 | 90 | 81.25 | 52.3 | 88 | good |
+| onnx/ViT-L/14 | 97.5 | 82.5 | 52.3 | 91 | good |
 
 
+# M1 Mac
 
 ## Add documents part
 
