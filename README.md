@@ -1,5 +1,48 @@
 # fast-clip-research
 
+# EC2 Instance
+### Add_Documents() Time
+
+| Model Name | Image Indexing Time (CBS = 100) | Text Indexing Time (CBS = 100) | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 50) | Image Indexing Time (CBS = 10) | Text Indexing Time (CBS = 10) | Image Indexing Time (CBS = 1) | Text Indexing Time (CBS = 1) |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Vit-B/32 * | 18 | 7 | 19 | 8 | 26 | 14 | 70 | 65 |
+| fast/Vit-B/32 ** | 17 | 6 | 36 | 8 | 44 | 14 | 80 | 80 |
+| Vit-L/14 | 74 | 9 | 74 | 11 | 80 | 15 | 129 | 65 |
+| fast/Vit-L/14 | 58 | 9 | 410 | 10 | 420 | 28 | 500 | 139 |
+| openclip/Vit-L/14 | 76 | 11.8 | 78 | 13 | 89 | 22 | 220 | 14 |
+| opencv/Vit-L-14/cuda | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
+| opencv/Vit-L-14/trt todo | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
+| onnx/ViT-L/14 | 64 | 9 | 60 | 10 | 71 | 28 | 226 | 139 |
+
+For __onnx/ViT-L/14__, there is a converging process in the processing speed. The indexing time starts from 150m/per doc and converges to 64ms/per doc after 40 batches.
+
+### Inference Speed
+
+| Models | Time cost | Difference | Comments |
+|---|---|---|---|
+| ViT-L/14 | 18.6 ms ± 60.2 µs | N/A | The inference speed is super fast in this unit test |
+| open-clip/ViT-L/14 | 66.9 ms ± 435 µs | N/A | This is a more reasonable speed on pytorch |
+| cuda:onnx/ViT-L/14 | 55.7 ms ± 166 µs | 9e-6 | Using clip_onnx package |
+| tensorrt:onnx/ViT-L/14 | 47.7 ms ± 639 µs | 9e-6 | The environment is really unstable，it has very strict requirements on onnxruntime, cuda, tensorrt version |
+| TorchDynam | 21 ms ± 234 µs | N/A | Basicly this is just another version of onnx or tensorrt, so it is not helping, [link](https://github.com/pytorch/torchdynamo) |
+| kernlai |  |  | It requires python>3.9 and gpu capability > 8, g5 instancem maybe, [link](https://github.com/ELS-RD/kernl) |
+
+
+### Preprocessing Speed
+
+| TRANSFORMS | TIME (ms) (PNG File with size = (2162, 762)) | TIME (ms) (JPG File with size = (640, 425)) | Comments |
+|---|---|---|---|
+| original_clip | 27.4 ms ± 94.8 µs | 4.39 ms ± 15 µs |  |
+| our_clip_implementation | 27.4 ms ± 49.8 µs | 4.4 ms ± 16.8 µs |  |
+| opencv_based | 4.8 ms ± 194 µs | 1.08 ms ± 3.02 µs |  |
+| script_based | 11.8 ms ± 51.2 µs | 2.26 ms ± 21.1 µs |  |
+| rgb_conversion | 18.4 ms ± 28.4 µs | 4.47 ms ± 13 µs |  |
+| grey_conversion | 12.7 ms ± 15.5 µs | 3 ms ± 60.1 µs |  |
+| read_from_cv | 672 µs ± 143 µs | 652 µs ± 70.4 µs |  |
+
+
+
+
 ## Add documents part
 
 We test the time of adding a document into index under different batch sizes.
@@ -66,43 +109,5 @@ This section compares different image preprocessing methods.
 | Optimized onnx | 4.12 ms ± 152 µs | No difference between onnx | [link](https://github.com/microsoft/onnxruntime/blob/433f262dd551e79f6b3af6d777b5c94eb907622a/onnxruntime/python/tools/transformers/optimizer.py#L53) | 9e-6 |
 
 
-# EC2 Instance
-### Add_Documents() Time
 
-| Model Name | Image Indexing Time (CBS = 100) | Text Indexing Time (CBS = 100) | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 50) | Image Indexing Time (CBS = 10) | Text Indexing Time (CBS = 10) | Image Indexing Time (CBS = 1) | Text Indexing Time (CBS = 1) |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Vit-B/32 * | 18 | 7 | 19 | 8 | 26 | 14 | 70 | 65 |
-| fast/Vit-B/32 ** | 17 | 6 | 36 | 8 | 44 | 14 | 80 | 80 |
-| Vit-L/14 | 74 | 9 | 74 | 11 | 80 | 15 | 129 | 65 |
-| fast/Vit-L/14 | 58 | 9 | 410 | 10 | 420 | 28 | 500 | 139 |
-| openclip/Vit-L/14 | 76 | 11.8 | 78 | 13 | 89 | 22 | 220 | 14 |
-| opencv/Vit-L-14/cuda | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
-| opencv/Vit-L-14/trt todo | 73 | 9 | 77 | 11 | 88 | 15 | 218 | 65 |
-| onnx/ViT-L/14 | 64 | 9 | 60 | 10 | 71 | 28 | 226 | 139 |
-
-For __onnx/ViT-L/14__, there is a converging process in the processing speed. The indexing time starts from 150m/per doc and converges to 64ms/per doc after 40 batches.
-
-### Inference Speed
-
-| Models | Time cost | Difference | Comments |
-|---|---|---|---|
-| ViT-L/14 | 18.6 ms ± 60.2 µs | N/A | The inference speed is super fast in this unit test |
-| open-clip/ViT-L/14 | 66.9 ms ± 435 µs | N/A | This is a more reasonable speed on pytorch |
-| cuda:onnx/ViT-L/14 | 55.7 ms ± 166 µs | 9e-6 | Using clip_onnx package |
-| tensorrt:onnx/ViT-L/14 | 47.7 ms ± 639 µs | 9e-6 | The environment is really unstable，it has very strict requirements on onnxruntime, cuda, tensorrt version |
-| TorchDynam | 21 ms ± 234 µs | N/A | Basicly this is just another version of onnx or tensorrt, so it is not helping, [link](https://github.com/pytorch/torchdynamo) |
-| kernlai |  |  | It requires python>3.9 and gpu capability > 8, g5 instancem maybe, [link](https://github.com/ELS-RD/kernl) |
-
-
-### Preprocessing Speed
-
-| TRANSFORMS | TIME (ms) (PNG File with size = (2162, 762)) | TIME (ms) (JPG File with size = (640, 425)) | Comments |
-|---|---|---|---|
-| original_clip | 27.4 ms ± 94.8 µs | 4.39 ms ± 15 µs |  |
-| our_clip_implementation | 27.4 ms ± 49.8 µs | 4.4 ms ± 16.8 µs |  |
-| opencv_based | 4.8 ms ± 194 µs | 1.08 ms ± 3.02 µs |  |
-| script_based | 11.8 ms ± 51.2 µs | 2.26 ms ± 21.1 µs |  |
-| rgb_conversion | 18.4 ms ± 28.4 µs | 4.47 ms ± 13 µs |  |
-| grey_conversion | 12.7 ms ± 15.5 µs | 3 ms ± 60.1 µs |  |
-| read_from_cv | 672 µs ± 143 µs | 652 µs ± 70.4 µs |  |
 
