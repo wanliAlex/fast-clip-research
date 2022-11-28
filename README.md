@@ -59,19 +59,29 @@ For __onnx/ViT-L/14__, there is a converging process in the processing speed. Th
 ### if we load the model from “cpu”, which is float32
 
 INFO:marqo.s2_inference.s2_inference:The client gives 1 documents to vectorise
+
 INFO:marqo.s2_inference.clip_utils:It takes about 0.005s to load all images. The average time for each image is 0.005s
+
 INFO:marqo.s2_inference.clip_utils:It takes about 0.005s to preprocess all images. The average time for each image is 0.005s
+
 INFO:marqo.s2_inference.clip_utils:It take about 0.011s to encode all images. The average time for each image is 0.011s
+
 INFO:marqo.s2_inference.clip_utils:It takes 0.049s to convert the output with `float32` to ndarray from cuda
+
 INFO:marqo.s2_inference.s2_inference:It take about 0.071s to vectorise all documents. The average time for each document is 0.071s
 
 ### if we load the model from “cuda”, which is float16
 
 INFO:marqo.s2_inference.s2_inference:The client gives 1 documents to vectorise
+
 INFO:marqo.s2_inference.clip_utils:It takes about 0.005s to load all images. The average time for each image is 0.005s
+
 INFO:marqo.s2_inference.clip_utils:It takes about 0.005s to preprocess all images. The average time for each image is 0.005s
+
 INFO:marqo.s2_inference.clip_utils:It take about 0.012s to encode all images. The average time for each image is 0.012s
+
 INFO:marqo.s2_inference.clip_utils:It takes 0.004s to convert the output with `float16` to ndarray from cuda
+
 INFO:marqo.s2_inference.s2_inference:It take about 0.026s to vectorise all documents. The average time for each document is 0.026s
 
 np.abs(np a - np b).sum().  0.13
@@ -79,10 +89,15 @@ np.abs(np a - np b).sum().  0.13
 ### if we load the model from “cpu” but cast it to float16
 
 INFO:marqo.s2_inference.s2_inference:The client gives 1 documents to vectorise
+
 INFO:marqo.s2_inference.clip_utils:It takes about 0.005s to load all images. The average time for each image is 0.005s
+
 INFO:marqo.s2_inference.clip_utils:It takes about 0.005s to preprocess all images. The average time for each image is 0.005s
+
 INFO:marqo.s2_inference.clip_utils:It take about 0.011s to encode all images. The average time for each image is 0.011s
+
 INFO:marqo.s2_inference.clip_utils:It takes 0.051s to convert the output with `float16` to ndarray from `cuda`
+
 INFO:marqo.s2_inference.s2_inference:It take about 0.072s to vectorise all documents. The average time for each document is 0.072s
 
 
