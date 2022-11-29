@@ -25,7 +25,7 @@ For __onnx/ViT-L/14__, there is a converging process in the processing speed. Th
 
 ### Inference Speed
 
-| Models | Time cost | Difference (mean difference) | Comments |
+| Models | Time cost | Difference (mean difference normalized by dimension) | Comments |
 |---|---|---|---|
 | load:cpu - ViT-L/14 | 66.2 ms ± 309 µs | N/A | The very original clip version, output.dtype: torch.float32 |
 | load:cuda - ViT-L/14 | 18.7 ms ± 245 µs | 3.6e-3 | We load the model from cuda, output.dtype: torch.float16 |
