@@ -27,8 +27,8 @@ For __onnx/ViT-L/14__, there is a converging process in the processing speed. Th
 
 | Models | Time cost | Difference (mean difference) | Comments |
 |---|---|---|---|
-| load:cpu - ViT-L/14 | 66.2 ms ± 309 µs | N/A | The inference speed is super fast in this unit test |
-| load:cuda - ViT-L/14 | 18.7 ms ± 245 µs | 3e-3 | The inference speed is super fast in this unit test |
+| load:cpu - ViT-L/14 | 66.2 ms ± 309 µs | N/A | The very original clip version, output.dtype: torch.float32 |
+| load:cuda - ViT-L/14 | 18.7 ms ± 245 µs | 3e-3 | We load the model from cuda, output.dtype: torch.float16 |
 | open-clip/ViT-L/14 | 66.9 ms ± 435 µs | N/A | This is a more reasonable speed on pytorch |
 | cuda:onnx/ViT-L/14 | 55.7 ms ± 166 µs | 9e-6 | Using clip_onnx package |
 | tensorrt:onnx/ViT-L/14 | 47.7 ms ± 639 µs | 9e-6 | The environment is really unstable，it has very strict requirements on onnxruntime, cuda, tensorrt version |
