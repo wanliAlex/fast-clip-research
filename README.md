@@ -54,6 +54,8 @@ For __onnx/ViT-L/14__, there is a converging process in the processing speed. Th
 
 # Inference Speed breakdown
 
+## Time Break Down for function `vectorise( )`
+
 ## For the pytorch “Vit-L/14” ,
 
 ### if we load the model from “cpu”, which is float32
