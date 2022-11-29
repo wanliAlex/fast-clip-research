@@ -25,14 +25,16 @@ For __onnx/ViT-L/14__, there is a converging process in the processing speed. Th
 - CBS == client_batch_size 
 ### Inference Speed
 
-| Models | Time cost | Difference | Comments |
+| Models | Time cost | Difference (mean difference) | Comments |
 |---|---|---|---|
-| ViT-L/14 | 18.6 ms ± 60.2 µs | N/A | The inference speed is super fast in this unit test |
+| load:cpu - ViT-L/14 | 66.2 ms ± 309 µs | N/A | The inference speed is super fast in this unit test |
+| load:cuda - ViT-L/14 | 18.7 ms ± 245 µs | 3e-3 | The inference speed is super fast in this unit test |
 | open-clip/ViT-L/14 | 66.9 ms ± 435 µs | N/A | This is a more reasonable speed on pytorch |
 | cuda:onnx/ViT-L/14 | 55.7 ms ± 166 µs | 9e-6 | Using clip_onnx package |
 | tensorrt:onnx/ViT-L/14 | 47.7 ms ± 639 µs | 9e-6 | The environment is really unstable，it has very strict requirements on onnxruntime, cuda, tensorrt version |
 | TorchDynam | 21 ms ± 234 µs | N/A | Basicly this is just another version of onnx or tensorrt, so it is not helping, [link](https://github.com/pytorch/torchdynamo) |
 | kernlai |  |  | It requires python>3.9 and gpu capability > 8, g5 instancem maybe, [link](https://github.com/ELS-RD/kernl) |
+
 
 
 ### Preprocessing Speed
