@@ -7,6 +7,9 @@ The images were locally hosted on a Python image server.
 # EC2 Instance
 ### Add_Documents() Time
 
+**Note**:
+- CBS == client_batch_size 
+
 | Model Name | Image Indexing Time (CBS = 100) | Text Indexing Time (CBS = 100) | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 50) | Image Indexing Time (CBS = 10) | Text Indexing Time (CBS = 10) | Image Indexing Time (CBS = 1) | Text Indexing Time (CBS = 1) |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Vit-B/32 * | 18 | 7 | 19 | 8 | 26 | 14 | 70 | 65 |
@@ -20,9 +23,6 @@ The images were locally hosted on a Python image server.
 
 For __onnx/ViT-L/14__, there is a converging process in the processing speed. The indexing time starts from 150m/per doc and converges to 64ms/per doc after 40 batches.
 
-
-**Note**:
-- CBS == client_batch_size 
 ### Inference Speed
 
 | Models | Time cost | Difference (mean difference) | Comments |
