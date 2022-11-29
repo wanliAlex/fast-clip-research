@@ -1,5 +1,9 @@
 # fast-clip-research
 
+For each of these tests, each document consists of a single field (text or image).
+
+The images were locally hosted on a Python image server.
+
 # EC2 Instance
 ### Add_Documents() Time
 
@@ -16,6 +20,9 @@
 
 For __onnx/ViT-L/14__, there is a converging process in the processing speed. The indexing time starts from 150m/per doc and converges to 64ms/per doc after 40 batches.
 
+
+**Note**:
+- CBS == client_batch_size 
 ### Inference Speed
 
 | Models | Time cost | Difference | Comments |
