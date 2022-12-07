@@ -1,5 +1,14 @@
 # fast-clip-research
 
+# Large Scale Test 
+
+| Model Name | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 100) | Text2Image Score | Image2Text Score | Image2Image |
+|---|---|---|---|---|---|
+| load-cpu: ViT-L/14 | 84ms | 10.5ms | 95 | 69 | [link]() |
+| load-gpu: ViT-L/14 | 34ms | 9.2ms | 95 | 68 | [link]() |
+| onnx-float16-opencv | xx | xx | xx | xx | [link]() |
+| onnx32 | 67ms | 9.5ms | 95 | 69 | [link]() |
+
 For each of these tests, each document consists of a single field (text or image).
 
 The images were locally hosted on a Python image server.
