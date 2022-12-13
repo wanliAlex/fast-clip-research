@@ -1,5 +1,111 @@
 # fast-clip-research
 
+# A short conclusion on the speed test
+
+## **********TLDR**********
+
+The test is done on g4 Sagemaker Instance with `device = "cuda"`
+
+**Inference**
+
+1. `"load:cpu-ViT-L/14"` is our current choice for clip model. Note that even if we pass the device `"cuda"` to the serve, the model is still firstly loaded from `"cpu"` and then moved to `"cude"` . This is to guarantee that all the operation are implemented in `torch.float32` precision. 
+2. `"onnx/ViT-L/14"` onnxruntime-gpu with CUDAExecutionProvider is almost the free lunch. It can produce exactly the same results as 1. It can only require some extra storage space to store the onnx models, which is 1GB around.
+3. `"load:cuda-ViT-L/14"` this methods loads the clip model directly into `"cuda"`, which makes all the computations are done in `torch.float16.` This can increase the inference speed but introduce a slightly difference.
+
+The inference speed and `add_document()` time cost as well as searching performance are shown in the table below:
+
+**Recommendation**s: encourage users to  `"onnx"` version to index the documents. `"load:cuda"` can be added but we should tell the users they may get different results.
+
+**Image Preprocessing**
+
+1. `clip.preprocess` the default clip image preprocessing takes the `PIL.Image` as input and process using the `PIL` functions. 
+2. One option is to replace all the `PIL.Processing` by OpenCV package `cv2` . It reads the image as `ndarray` and process it. This faster but unfortunately, results are different.
+
+The preprocessing speed and there search performance are shown as below. Note that the preprocessing speed varies when different input images are passed. 
+
+**Recommendations:** ask the customer the provide the image with a small size and RBG channels (.jpg). This will reduce the preprocessing time in the indexing. I wouldn’t think we should add the opencv preprocessing into our model as the differences are relative large and noticeable. 
+
+## Intro
+
+We focus the inference speed of clip model here. 
+
+When we aim to index a document (whether a image or text), the document is passed to the clip model to convert it to tensors by calling the function `vectorise()` . In our settings, every time we call `vectorise()` , only one document is passed into the neural network model. For example, if we want to index 1,000 documents, the `vectorise()` will be called 1,000 times. 
+
+The reason that we emphasise this point is to specify the situation that we want to accelerate:  
+
+**single batch with one example.** 
+
+This special situation disables a lot of  widely used batching based accelerating methods. We should always put this special in our mind when we test the accelerating methods.
+
+While `clip_models` can take both images and text as inputs and vectorise them into tensors, we mainly focus on the image inputs as they are time consuming. For comparison, an image may take about 80ms to vectorise while a text sentence may take only 10ms. 
+
+## Image Preprocessing
+
+When an image is passed to the clip_model, there are two step, 
+
+- 1) image preprocessing,
+    
+    2) inference 
+    
+
+The image preprocessing step will convert the input to a 3-channel (RGB) normalised image (tensor) with size 224X224X3, however the input size or channel. The code for image preprocessing is:
+
+```python
+from torchvision.transforms import Compose, Normalize, Resize, CenterCrop, ToTensor
+
+def _convert_image_to_rgb(image):
+    return image.convert("RGB")
+
+torchvision_transform = Compose([
+		    #torchvision transform normally takes PIL Image as input
+        Resize(224, interpolation=transforms.InterpolationMode.BICUBIC),
+        CenterCrop(224),
+        _convert_image_to_rgb,
+        transforms.ToTensor(),
+        Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)),
+])
+```
+
+The required input type is `PIL.Image.` 
+
+**RGB Conversion**
+
+Note that the time consuming steps `Resize` and `CenterCrop` are implemented before the RGB conversion. This means if an image has 4 channels (e.g., “.png” image with RGBa), these time consuming steps are implemented on a 4 dimensional tensor, which takes longer time than on a 3 dimensional tensor. Following this, one simple way to speeding up the preprocessing step is to swap the order of RGB conversion and those resizing steps, which we have:
+
+```python
+rgb_transform= Compose([
+# We convert the image to rgb first before resize, centercrop, etc._convert_image_to_rgb,
+    Resize(224, interpolation=transforms.InterpolationMode.BICUBIC),
+    CenterCrop(224),
+    ToTensor(),
+    Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)),
+])
+```
+
+Note that the results will be different for non-RGB images.
+
+**OpenCV Conversion**
+
+As we aforementioned, the preprocessing is conducted under `PIL.Image` format. Another widely used image preprocessing package is `OpenCV` . It is not hard to reimplement the whole process in `OpenCV` by the following code with the `augmennt` (package)[https://github.com/wanliAlex/augmennt]. 
+
+```python
+cv_transform= at.Compose([
+    at.Resize(224, interpolation= "BICUBIC"),
+    at.CenterCrop(224),
+    _convert_bgr_to_rgb,
+    at.ToTensor(),
+    Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)),
+])
+```
+
+This is super fast, especially when the input size is large. However, it will introduce a large difference in the result.
+
+## Inference
+
+
+
+
+
 # Large Scale Test 
 
 | Model Name | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 100) | Text2Image Score | Image2Text Score | Image2Image |
