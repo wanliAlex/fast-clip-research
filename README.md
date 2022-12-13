@@ -13,6 +13,11 @@ The test is done on g4 Sagemaker Instance with `device = "cuda"`
 3. `"load:cuda-ViT-L/14"` this methods loads the clip model directly into `"cuda"`, which makes all the computations are done in `torch.float16.` This can increase the inference speed but introduce a slightly difference.
 
 The inference speed and `add_document()` time cost as well as searching performance are shown in the table below:
+| Model Name | Inference Time | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 100) | Text2Image Score | Image2Text Score |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| load:cpu-ViT-L/14 | 66ms | 84ms | 10.5ms | 95 | 69 |
+| load:gpu-ViT-L/14 | 22ms | 34ms | 9.2ms | 95 | 68 |
+| onnx/ViT-L/14 | 55ms | 67ms | 9.5ms | 95 | 69 |
 | Preprocessing Method | TIME (ms) (PNG File with size = (2162, 762)) | TIME (ms) (JPG File with size = (640, 425)) | Text2Image Score | Image2Text Score |
 |:---:|:---:|:---:|---|---|
 | original_clip | 27.4 ms ± 94.8 µs | 4.39 ms ± 15 µs | 97.5 | 91 |
