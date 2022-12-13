@@ -18,10 +18,6 @@ The inference speed and `add_document()` time cost as well as searching performa
 | load:cpu-ViT-L/14 | 66ms | 84ms | 10.5ms | 95 | 69 |
 | load:gpu-ViT-L/14 | 22ms | 34ms | 9.2ms | 95 | 68 |
 | onnx/ViT-L/14 | 55ms | 67ms | 9.5ms | 95 | 69 |
-| Preprocessing Method | TIME (ms) (PNG File with size = (2162, 762)) | TIME (ms) (JPG File with size = (640, 425)) | Text2Image Score | Image2Text Score |
-|:---:|:---:|:---:|---|---|
-| original_clip | 27.4 ms ± 94.8 µs | 4.39 ms ± 15 µs | 97.5 | 91 |
-| opencv | 672 µs ± 143 µs | 652 µs ± 70.4 µs | 90 | 88 |
 
 **Recommendation**s: encourage users to  `"onnx"` version to index the documents. `"load:cuda"` can be added but we should tell the users they may get different results.
 
@@ -31,6 +27,11 @@ The inference speed and `add_document()` time cost as well as searching performa
 2. One option is to replace all the `PIL.Processing` by OpenCV package `cv2` . It reads the image as `ndarray` and process it. This faster but unfortunately, results are different.
 
 The preprocessing speed and there search performance are shown as below. Note that the preprocessing speed varies when different input images are passed. 
+
+| Preprocessing Method | TIME (ms) (PNG File with size = (2162, 762)) | TIME (ms) (JPG File with size = (640, 425)) | Text2Image Score | Image2Text Score |
+|:---:|:---:|:---:|---|---|
+| original_clip | 27.4 ms ± 94.8 µs | 4.39 ms ± 15 µs | 97.5 | 91 |
+| opencv | 672 µs ± 143 µs | 652 µs ± 70.4 µs | 90 | 88 |
 
 **Recommendations:** ask the customer the provide the image with a small size and RBG channels (.jpg). This will reduce the preprocessing time in the indexing. I wouldn’t think we should add the opencv preprocessing into our model as the differences are relative large and noticeable. 
 
