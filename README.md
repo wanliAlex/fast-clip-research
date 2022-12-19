@@ -13,12 +13,12 @@ The test is done on g4 Sagemaker Instance with `device = "cuda"`
 3. `"load:cuda-ViT-L/14"` this methods loads the clip model directly into `"cuda"`, which makes all the computations are done in `torch.float16.` This can increase the inference speed but introduce a slightly difference.
 
 The inference speed and `add_document()` time cost as well as searching performance are shown in the table below:
-| Model Name | Inference Time | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 100) | Text2Image Score | Image2Text Score |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| load:cpu-ViT-L/14 | 66ms | 84ms | 10.5ms | 95 | 69 |
-| load:gpu-ViT-L/14 | 22ms | 34ms | 9.2ms | 95 | 68 |
-| onnx/ViT-L/14 | 55ms | 67ms | 9.5ms | 95 | 69 |
-| onnx16/ViT-L/14 |  19ms |   28ms   |       |    |    |
+| Model Name | Inference Time | Image Indexing Time (CBS = 50) | Text Indexing Time (CBS = 100) | Text2Image Score | Image2Text Score | device|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| load:cpu-ViT-L/14 | 66ms | 84ms | 10.5ms | 95 | 69 |cuda|
+| load:gpu-ViT-L/14 | 22ms | 34ms | 9.2ms | 95 | 68 |cuda|
+| onnx/ViT-L/14 | 55ms | 67ms | 9.5ms | 95 | 69 |cuda|
+| onnx16/ViT-L/14 |  19ms |   28ms   |       |    |    |cuda|
 
 **Recommendation**s: encourage users to  `"onnx"` version to index the documents. `"load:cuda"` can be added but we should tell the users they may get different results.
 
