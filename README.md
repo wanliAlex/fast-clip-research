@@ -18,6 +18,7 @@ The inference speed and `add_document()` time cost as well as searching performa
 | load:cpu-ViT-L/14 | 66ms | 84ms | 10.5ms | 95 | 69 |
 | load:gpu-ViT-L/14 | 22ms | 34ms | 9.2ms | 95 | 68 |
 | onnx/ViT-L/14 | 55ms | 67ms | 9.5ms | 95 | 69 |
+| onnx/ViT-L/14 |  19    |      |       |    |    |
 
 **Recommendation**s: encourage users to  `"onnx"` version to index the documents. `"load:cuda"` can be added but we should tell the users they may get different results.
 
