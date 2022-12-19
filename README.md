@@ -8,7 +8,7 @@ The test is done on g4 Sagemaker Instance with `device = "cuda"`
 
 **Inference**
 
-1. `"load:cpu-ViT-L/14"` is our current choice for clip model. Note that even if we pass the device `"cuda"` to the serve, the model is still firstly loaded from `"cpu"` and then moved to `"cude"` . This is to guarantee that all the operation are implemented in `torch.float32` precision. 
+1. `"load:cpu-ViT-L/14"` is our current choice for clip model. Note that even if we pass the device `"cuda"` to the serve, the model is still firstly loaded from `"cpu"` and then moved to `"cuda"` . This is to guarantee that all the operation are implemented in `torch.float32` precision. 
 2. `"onnx/ViT-L/14"` onnxruntime-gpu with CUDAExecutionProvider is almost the free lunch. It can produce exactly the same results as 1. It can only require some extra storage space to store the onnx models, which is 1GB around.
 3. `"load:cuda-ViT-L/14"` this methods loads the clip model directly into `"cuda"`, which makes all the computations are done in `torch.float16.` This can increase the inference speed but introduce a slightly difference.
 
